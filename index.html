@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Grade Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background: rgb(218, 175, 124);
+        background-image:url("rp.jpeg") ;
+    }
+    .container {
+        background: rgb(195, 175, 151);
+        padding: 20px;
+        width: 350px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 10px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #2b4094;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+    button:hover {
+        background: #1d4066;
+    }
+    .result {
+        background: #e9ffe9;
+        padding: 10px;
+        margin-top: 15px;
+        border-left: 5px solid green;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Grade Calculator</h2>
+
+    <label>Subject 1:</label>
+    <input type="number" id="sub1">
+
+    <label>Subject 2:</label>
+    <input type="number" id="sub2">
+
+    <label>Subject 3:</label>
+    <input type="number" id="sub3">
+
+    <label>Subject 4:</label>
+    <input type="number" id="sub4">
+
+    <label>Subject 5:</label>
+    <input type="number" id="sub5">
+
+    <button onclick="calculateGrade()">Calculate</button>
+
+    <div id="output" class="result" style="display:none;"></div>
+</div>
+
+<script>
+function calculateGrade() {
+    let s1 = Number(document.getElementById("sub1").value);
+    let s2 = Number(document.getElementById("sub2").value);
+    let s3 = Number(document.getElementById("sub3").value);
+    let s4 = Number(document.getElementById("sub4").value);
+    let s5 = Number(document.getElementById("sub5").value);
+
+    // Validate inputs
+    if ([s1, s2, s3, s4, s5].some(v => isNaN(v))) {
+        alert("Please enter valid marks for all subjects!");
+        return;
+    }
+
+    let total = s1 + s2 + s3 + s4 + s5;
+    let average = total / 5;
+    let grade = "";
+
+    // Custom grading scale
+    if (average >= 90) grade = "A+";
+    else if (average >= 80) grade = "A";
+    else if (average >= 70) grade = "B";
+    else if (average >= 60) grade = "C";
+    else if (average >= 50) grade = "D";
+    else grade = "F";
+
+    // Display output
+    document.getElementById("output").style.display = "block";
+    document.getElementById("output").innerHTML = `
+        <strong>Total Marks:</strong> ${total} <br>
+        <strong>Average:</strong> ${average.toFixed(2)} <br>
+        <strong>Grade:</strong> ${grade}
+    `;
+}
+</script>
+
+</body>
+</html>
